@@ -2,8 +2,8 @@ import sqlite3
 
 MASTER_PASSSWORD = "1234"
 
+senha_Usuario = input("Digite sua senha: ")
 conn = sqlite3.connect('passwords.db')
-
 cursor = conn.cursor()
 
 cursor.execute('''
@@ -13,6 +13,14 @@ cursor.execute('''
     passwrd TEXT NOT NULL
     );
 ''')
+    
+
+
+
+if senha_Usuario != MASTER_PASSSWORD:
+    print("Senha errada \n Encerrando...")
+    break; 
+    conn.close()
 def Menu():
     print("* I: Inserir uma nova senha: ")
     print("L: Listar serviços salvos: ")
@@ -21,12 +29,12 @@ def Menu():
 
 while(True):
     Menu()
-    op = input("Qual opção deseja fazer: ")
+    op = input("Qual opção deseja fazer: ").upper()
     if op not in ['I','L','R','S']:
         print("Opção Invalida !!")
         continue
 
-    if op == 's' or 'S':
+    if op == 'S':
         break;
  
 conn.close()
